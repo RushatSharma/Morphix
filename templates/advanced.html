@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Morphix - Advance Features</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/advanced.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <a href="{{ url_for('index') }}" class="logo">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M9 3h6v6H9zM9 15h6v6H9zM4.5 9h3v6h-3zM16.5 9h3v6h-3z" />
+                </svg>
+                <span>Morphix</span>
+            </a>
+            <div class="nav-links">
+                <a href="{{ url_for('index') }}">Home</a>
+                <a href="{{ url_for('adjustments') }}">Image Adjustments</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+            <div class="tools-container">
+                <h2>Advance Image Tools</h2>
+                <!-- Status indicator for OpenCV -->
+                <div id="opencv-status" style="display: none;">OpenCV not loaded</div>
+                
+                <!-- Tool tabs -->
+                <div class="tool-tabs">
+                    <button class="tool-tab active" data-tab="resize">Resize & Crop</button>
+                    <button class="tool-tab" data-tab="artistic">Artistic Filters</button>
+                    <button class="tool-tab" data-tab="compress">Compression</button>
+                </div>
+                
+                <!-- Tool panels -->
+                <div class="tool-panels">
+                    <!-- File Input (shared across all tools) -->
+                    <div class="file-input-section">
+                        <input type="file" id="fileInput" name="file" accept="image/*" hidden>
+                        <label for="fileInput">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            Select Image
+                        </label>
+                        <span id="fileName">No file selected</span>
+                    </div>
+
+                    <!-- Resize & Crop Panel -->
+                    <div class="tool-panel active" id="resize-panel">
+                        <div class="resize-options">
+                            <h3>Resize Options</h3>
+                            
+                            <div class="option-group">
+                                <label>
+                                    <input type="radio" name="resize-type" value="dimensions" checked>
+                                    Custom Dimensions
+                                </label>
+                                
+                                <div class="dimension-inputs">
+                                    <div class="input-group">
+                                        <label for="width">Width (px)</label>
+                                        <input type="number" id="width" min="1" max="5000">
+                                    </div>
+                                    
+                                    <div class="input-group">
+                                        <label for="height">Height (px)</label>
+                                        <input type="number" id="height" min="1" max="5000">
+                                    </div>
+                                    
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" id="keepAspectRatio" checked>
+                                        Maintain aspect ratio
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div class="option-group">
+                                <label>
+                                    <input type="radio" name="resize-type" value="percentage" >
+                                    Compression Quality (JPG/WebP)
+                                </label>
+                                
+                                <div class="percentage-input">
+                                    <input type="range" id="percentageSlider" min="1" max="100" value="100">
+                                    <span id="percentageValue">100%</span>
+                                </div>
+                            </div>
+                            
+                            <div class="option-group">
+                                <label>Presets</label>
+                                <div class="preset-buttons">
+                                    <button class="preset-button" data-width="1280" data-height="720">720p</button>
+                                    <button class="preset-button" data-width="1920" data-height="1080">1080p</button>
+                                    <button class="preset-button" data-width="1200" data-height="1200">Square</button>
+                                    <button class="preset-button" data-width="1080" data-height="1350">Instagram</button>
+                                </div>
+                            </div>
+                            
+                            <button id="resizeButton" class="process-button" disabled>
+                                <i class="fas fa-crop-alt"></i>
+                                Resize Image
+                            </button>
+                        </div>
+                        
+                        <div class="preview-area">
+                            <div class="image-container">
+                                <img id="resizePreview" src="#" alt="Preview" style="display: none;">
+                                <div class="placeholder-text">Upload an image to preview</div>
+                            </div>
+                            <div class="dimension-info">
+                                <span id="originalDimensions">Original: 0 x 0 px</span>
+                                <span id="newDimensions">New: 0 x 0 px</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Artistic Filters Panel -->
+<div class="tool-panel" id="artistic-panel">
+    <div class="filter-options">
+        <h3>Artistic Effects</h3>
+        
+        <div class="filter-grid" style="display: grid; grid-template-columns: repeat(3, 1fr) !important; gap: 1rem; margin-bottom: 1.5rem;">
+            <!-- Row 1 -->
+            <div class="filter-option" data-filter="sketch">
+                <div class="filter-preview">
+                    <i class="fas fa-pencil-alt"></i>
+                    <span>Sketch</span>
+                </div>
+            </div>
+            <div class="filter-option" data-filter="oil_painting">
+                <div class="filter-preview">
+                    <i class="fas fa-brush"></i>
+                    <span>Oil Painting</span>
+                </div>
+            </div>
+            <div class="filter-option" data-filter="sepia">
+                <div class="filter-preview">
+                    <i class="fas fa-sun"></i>
+                    <span>Sepia</span>
+                </div>
+            </div>
+
+            <!-- Row 2 -->
+            <div class="filter-option" data-filter="vignette">
+                <div class="filter-preview">
+                    <i class="fas fa-circle"></i>
+                    <span>Vignette</span>
+                </div>
+            </div>
+            <div class="filter-option" data-filter="grayscale">
+                <div class="filter-preview">
+                    <i class="fas fa-moon"></i>
+                    <span>Grayscale</span>
+                </div>
+            </div>
+            <div class="filter-option" data-filter="blur">
+                <div class="filter-preview">
+                    <i class="fas fa-arrows-alt-h"></i>  <!-- Changed icon -->
+                    <span>Motion Blur</span>
+                </div>
+            </div>
+
+            <!-- Row 3 -->
+            <div class="filter-option" data-filter="invert">
+                <div class="filter-preview">
+                    <i class="fas fa-adjust"></i>
+                    <span>Invert Colors</span>
+                </div>
+            </div>
+            <div class="filter-option" data-filter="pixelate">
+                <div class="filter-preview">
+                    <i class="fas fa-th-large"></i>
+                    <span>Pixelate</span>
+                </div>
+            </div>
+ 
+        </div>
+        
+        <button id="applyArtisticFilter" class="process-button" disabled>
+            <i class="fas fa-palette"></i>
+            Apply Filter
+        </button>
+    </div>
+    
+    <div class="preview-area">
+        <div class="image-container">
+            <img id="artisticPreview" src="#" alt="Preview" style="display: none;">
+            <div class="placeholder-text">Upload an image to preview</div>
+        </div>
+    </div>
+</div>
+                    
+                   
+                    
+                    <!-- Compression Panel -->
+                    <div class="tool-panel" id="compress-panel">
+                        <div class="compress-options">
+                            <h3>Image Compression</h3>
+                            
+                            <div class="option-group">
+                                <label for="compressFormat">Format</label>
+                                <select id="compressFormat">
+                                    <option value="jpg">JPG</option>
+                                    <option value="webp">WebP</option>
+                                    <option value="png">PNG (lossless)</option>
+                                </select>
+                            </div>
+                            
+                            <div class="option-group">
+                                <label for="compressQuality">Quality</label>
+                                <input type="range" id="compressQuality" min="0.1" max="1" step="0.05" value="0.7">
+                                <span id="qualityDisplayValue">70%</span>
+                            </div>
+                            
+                            <div class="option-group">
+                                <label for="resizeBeforeCompress">Resize before compression</label>
+                                <div class="resize-compress-options">
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" id="resizeBeforeCompress">
+                                        Enable resize
+                                    </label>
+                                    
+                                    <div class="input-group">
+                                        <label for="compressWidth">Max Width</label>
+                                        <input type="number" id="compressWidth" min="100" max="5000" value="1280" disabled>
+                                    </div>
+                                    
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" id="keepCompressAspectRatio" checked disabled>
+                                        Maintain aspect ratio
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div class="compression-info">
+                                <div class="info-item">
+                                    <span>Original Size:</span>
+                                    <span id="originalSize">0 KB</span>
+                                </div>
+                                <div class="info-item">
+                                    <span>Estimated Size:</span>
+                                    <span id="estimatedSize">0 KB</span>
+                                </div>
+                                <div class="info-item">
+                                    <span>Reduction:</span>
+                                    <span id="reductionPercent">0%</span>
+                                </div>
+                            </div>
+                            
+                            <button id="compressButton" class="process-button" disabled>
+                                <i class="fas fa-compress-alt"></i>
+                                Compress Image
+                            </button>
+                        </div>
+                        
+                        <div class="preview-area">
+                            <div class="image-container">
+                                <img id="compressPreview" src="#" alt="Preview" style="display: none;">
+                                <div class="placeholder-text">Upload an image to preview</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="download-section">
+                <a id="downloadLink" class="download-button" style="display: none;">
+                    <i class="fas fa-download"></i>
+                    Download Image
+                </a>
+            </div>
+    </main>
+
+    <footer>
+        <div class="footer-grid">
+            <div>
+                <h4>Morphix</h4>
+                <p>Making image transformation smarter and more efficient.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                </div>
+            </div>
+            <div>
+                <h4>Resources</h4>
+                <a href="#">Blog</a>
+                <a href="#">Help Center</a>
+                <a href="#">API Documentation</a>
+            </div>
+            <div>
+                <h4>Legal</h4>
+                <a href="#">Privacy</a>
+                <a href="#">Terms</a>
+                <a href="#">Security</a>
+            </div>
+        </div>
+        <div class="copyright">
+            © 2024 Morphix | Crafted with precision | Rushat Sharma
+        </div>
+    </footer>
+
+    <script async src="https://docs.opencv.org/4.7.0/opencv.js" onload="onOpenCVReady()"></script>
+    <script src="{{ url_for('static', filename='js/advanced.js') }}"></script>
+</body>
+</html>

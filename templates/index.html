@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Morphix</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <a href="#" class="logo">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M9 3h6v6H9zM9 15h6v6H9zM4.5 9h3v6h-3zM16.5 9h3v6h-3z" />
+                </svg>
+                <span>Morphix</span>
+            </a>
+            <div class="nav-links">
+                <a href="{{ url_for('index') }}">Home</a>
+                <a href="{{ url_for('adjustments') }}">Image Adjustments</a>
+                <a href="{{ url_for('advanced') }}">Other Tools</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="container">
+            <h1 class="main-heading">Precision Image Transformation</h1>
+            <p class="tagline">Discover personalized image editing from over a dozen algorithmic filters, tailored specifically to your creative needs and delivered with technical precision.</p>
+        </div>
+    </section>
+
+    <main class="container">
+        <div class="filter-grid-container">
+            <div class="filter-grid-nav">
+                <button class="grid-nav-btn" id="prevBtn" disabled>
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="grid-nav-btn" id="nextBtn">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+            <div class="filter-grid" id="filterGrid">
+                <div class="filter-card">
+                    <h3>Mean Blur</h3>
+                    <p>Applies uniform blur by averaging pixel values within a defined window size, creating smooth transitions while reducing noise and detail.</p>
+                </div>
+                <div class="filter-card">
+                    <h3>Gaussian Blur</h3>
+                    <p>Creates natural-looking blur using weighted averages with a Gaussian distribution, preserving edges better than standard mean blur.</p>
+                </div>
+                <div class="filter-card">
+                    <h3>Median Filter</h3>
+                    <p>Replaces each pixel with the median value of neighboring pixels, excellent for removing salt-and-pepper noise while preserving edges.</p>
+                </div>
+                <div class="filter-card">
+                    <h3>Laplacian Edge</h3>
+                    <p>Detects edges by calculating the second derivative, highlighting regions of rapid intensity change in all directions simultaneously.</p>
+                </div>
+                <div class="filter-card">
+                    <h3>Sobel Edge</h3>
+                    <p>Emphasizes edges using gradient measurements in horizontal and vertical directions, providing better noise suppression than simple derivatives.</p>
+                </div>
+                <div class="filter-card">
+                    <h3>Canny Edge</h3>
+                    <p>Multi-stage edge detection algorithm that reduces noise, finds intensity gradients, and applies hysteresis thresholding for optimal edge detection.</p>
+                </div>
+                <div class="filter-card">
+                    <h3>Binary Threshold</h3>
+                    <p>Converts grayscale images to black and white using a fixed threshold value, creating stark contrasts and simplified representations.</p>
+                </div>
+                <div class="filter-card">
+                    <h3>Otsu's Threshold</h3>
+                    <p>Automatically determines optimal threshold value by minimizing intra-class variance, ideal for bimodal images with distinct foreground and background.</p>
+                </div>
+            </div>
+        </div>
+
+        <section class="upload-section">
+            <h2>Begin Your Transformation</h2>
+            <p class="upload-instructions">Upload your image and select a filter to transform it with algorithmic precision. Our system will process your image immediately.</p>
+            
+            <form id="uploadForm" enctype="multipart/form-data">
+                <div class="upload-steps">
+                    <div class="step">
+                        <span class="step-number">1</span>
+                        <div class="file-input">
+                            <input type="file" id="fileInput" name="file" accept="image/*" hidden>
+                            <label for="fileInput">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                Select Image
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <span class="step-number">2</span>
+                        <div class="filter-select">
+                            <select name="filter" id="filterSelect">
+                                <option value="none">Choose Filter...</option>
+                                <option value="mean">Mean Blur</option>
+                                <option value="gaussian">Gaussian Blur</option>
+                                <option value="median">Median Filter</option>
+                                <option value="laplacian">Laplacian Edge</option>
+                                <option value="sobel">Sobel Edge</option>
+                                <option value="canny">Canny Edge</option>
+                                <option value="binary">Binary Threshold</option>
+                                <option value="otsu">Otsu's Threshold</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <span class="step-number">3</span>
+                        <button type="submit" class="process-button">
+                            <i class="fas fa-magic"></i>
+                            Process Image
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </section>
+
+        <div class="preview-container">
+            <div class="preview-panel">
+                <h3>Original Composition</h3>
+                <div class="image-container">
+                    <img id="originalPreview" src="#" alt="Original Image">
+                </div>
+            </div>
+            <div class="preview-panel">
+                <h3>Transformed Result</h3>
+                <div class="image-container">
+                    <img id="processedPreview" src="#" alt="Processed Image">
+                </div>
+            </div>
+        </div>
+        <div class="download-container">
+            <div class="format-controls">
+                <select id="formatSelect" class="format-select">
+                    <option value="png">PNG</option>
+                    <option value="jpg">JPG</option>
+                    <option value="webp">WEBP</option>
+                    <option value="pdf">PDF</option>
+                </select>
+                
+                <div class="quality-control" id="qualityControl">
+                    <label>Quality:</label>
+                    <input type="range" id="qualityRange" min="0" max="1" step="0.1" value="0.9">
+                    <span id="qualityValue">90%</span>
+                </div>
+                
+                <a id="downloadLink" class="download-button">
+                    <i class="fas fa-download"></i>
+                    Download Image
+                </a>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <div class="footer-grid">
+            <div>
+                <h4>Morphix</h4>
+                <p>Making image transformation smarter and more efficient.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                </div>
+            </div>
+            <div>
+                <h4>Resources</h4>
+                <a href="#">Blog</a>
+                <a href="#">Help Center</a>
+                <a href="#">API Documentation</a>
+            </div>
+            <div>
+                <h4>Legal</h4>
+                <a href="#">Privacy</a>
+                <a href="#">Terms</a>
+                <a href="#">Security</a>
+            </div>
+        </div>
+        <div class="copyright">
+            © 2024 Morphix | Crafted with precision | Rushat Sharma
+        </div>
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script async src="https://docs.opencv.org/4.7.0/opencv.js" onload="onOpenCVReady()"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
