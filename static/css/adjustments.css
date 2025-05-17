@@ -1,0 +1,208 @@
+/* Adjustments specific styles */
+.adjustments-section {
+    padding: 10px 0;
+    background: rgba(255, 255, 255, 0.85);
+}
+
+.adjustments-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.preview-wrapper {
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 3px 15px rgba(55, 6, 23, 0.1);
+}
+
+.controls-wrapper {
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 3px 15px rgba(55, 6, 23, 0.1);
+}
+
+.adjustment-control {
+    margin-bottom: 1.5rem;
+}
+
+.adjustment-control label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--dark-chocolate);
+    font-weight: 500;
+}
+
+.adjustment-control input[type="range"] {
+    width: 100%;
+    height: 8px;
+    background: #eee;
+    border-radius: 4px;
+    outline: none;
+    -webkit-appearance: none;
+}
+
+.adjustment-control input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    background: var(--burgundy);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.reset-button {
+    background: var(--burgundy);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 1rem;
+    width: 100%;
+}
+
+/* Added styles for file input that was missing in the original */
+.file-input {
+    margin-bottom: 2rem;
+}
+
+.file-input label {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 0.75rem 1.5rem;
+    background: var(--burgundy);
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    min-width: 160px;
+}
+
+.file-input label:hover {
+    background: #d04831;
+    transform: translateY(-2px);
+}
+
+
+/* Fixed size for the preview and controls */
+.preview-wrapper {
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 3px 15px rgba(55, 6, 23, 0.1);
+    height: 500px;
+    overflow: hidden;
+}
+
+.image-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.image-container img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.controls-wrapper {
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 3px 15px rgba(55, 6, 23, 0.1);
+    height: 500px;
+    overflow-y: auto;
+}
+
+/* Download section styles */
+.download-wrapper {
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 3px 15px rgba(55, 6, 23, 0.1);
+    margin-top: 2rem;
+    grid-column: span 2;
+}
+
+.format-controls {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.format-select {
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    background: white;
+    font-family: 'Inter', sans-serif;
+}
+
+.quality-control {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.quality-control label {
+    color: var(--dark-chocolate);
+    font-weight: 500;
+}
+
+.quality-control input[type="range"] {
+    width: 100px;
+    height: 8px;
+    background: #eee;
+    border-radius: 4px;
+    outline: none;
+    -webkit-appearance: none;
+}
+
+.quality-control input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    background: var(--burgundy);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.download-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 0.75rem 1.5rem;
+    background: var(--burgundy);
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.download-button:hover {
+    background: #d04831;
+    transform: translateY(-2px);
+}
+
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .adjustments-container {
+        grid-template-columns: 1fr;
+    }
+}
