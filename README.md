@@ -1,170 +1,84 @@
-# Morphix – Precision Image Transformation
 
-Morphix is an all-in-one, web-based image processing platform designed for both casual users and professional workflows. With an intuitive, responsive UI and real-time sliders, you can fine-tune brightness, contrast, saturation, hue, temperature, and sharpness directly in your browser. Advanced users benefit from OpenCV.js integration—sketch, sepia, vignette, edge detection, thresholding, pixelation, oil painting, and vintage filters—while a Flask-powered backend enables batch processing, PDF exports, and server-side enhancements. Ideal for social media creatives, print-prep specialists, and developers seeking an extensible imaging pipeline, Morphix delivers high-quality results with minimal setup.
+# Morphix – Precision Image Transformation  
+#### Video Demo: https://youtu.be/your_video_url_here  
+#### Description:
 
----
-## 📌 About
+Morphix is a comprehensive, web-based image processing application designed to serve both casual users and professional workflows. It combines client-side editing for quick, real-time adjustments with server-side processing for advanced features, all wrapped in a clean, responsive interface. Users can perform basic edits—brightness, contrast, saturation, hue, temperature, sharpness—via intuitive sliders, and apply powerful OpenCV filters such as sketch, sepia, vignette, pixelate, oil painting, motion blur, Canny edge detection, Sobel, Laplacian, thresholding, and vintage effects. Final outputs may be downloaded in PNG, JPG, WebP formats or bundled into a multi-page PDF, with live file-size estimates and adjustable compression settings.
 
-Morphix merges the simplicity of client-side canvas adjustments with the power of OpenCV without requiring heavy installs. Drag and drop images to tweak colour properties instantly; switch to the Advanced tab for creative filters or precise edge-detection workflows. The optional Python Flask backend supports:
+When launching Morphix, the homepage presents two prominent options: **Adjustments** and **Advanced Editing**, alongside a live preview pane. From here, users can immediately apply one-click filters—grayscale, invert, sketch, sepia, vintage, pixelate, oil painting, vignette—and decide whether to proceed with a quick preset or dive deeper into granular controls. This quick-start design reduces cognitive load and lets novices and experts alike begin editing within seconds.
 
-- **Automated batch jobs:** process multiple images in one request  
-- **Compression & sizing:** on-the-fly quality control and live size estimates  
-- **PDF exports:** bundle single or multiple images into a multi-page PDF  
+#### Detailed Functionality
 
-Morphix’s modular codebase invites developers to add new filters, themes, and export formats with ease.
+**Adjustments Page**  
+After selecting **Adjustments**, users upload an image via the file input control. The image is loaded onto an HTML5 Canvas, where six sliders—brightness, contrast, saturation, hue, temperature, and sharpness—become available. Each slider is linked to a JavaScript event listener that recalculates and redraws pixel data in under 50 ms, ensuring instant visual feedback without page reloads. This non-destructive, client-side approach saves bandwidth and delivers a smooth, desktop-like experience in any modern browser.
 
----
+**Advanced Editing Page**  
+The **Advanced** tab brings in **OpenCV.js**, a WebAssembly port of the OpenCV library. Users upload an image and then choose from a suite of advanced filters executed entirely in the browser:  
+- **Artistic Effects**: Sketch, Oil Painting, Vignette, Vintage  
+- **Creative Distortions**: Motion Blur, Pixelate  
+- **Edge Detectors**: Canny, Sobel, Laplacian  
+- **Thresholding**: Binary, Otsu’s method  
 
-## ✨ Features
+Resize and crop tools include common presets (720p, 1080p, Instagram square) as well as custom dimensions with an aspect-ratio lock. A real-time compression preview shows estimated file size for JPEG/WebP outputs, enabling users to balance visual fidelity and storage constraints before downloading.
 
-### 1. Basic Adjustments (Client-Side)
-- Real-time sliders for brightness, contrast, saturation, hue, temperature, sharpness  
-- Non-destructive edits powered by HTML5 Canvas  
-- Responsive design: mobile and desktop friendly  
+**Download & Export**  
+Once editing is complete, users choose from PNG, JPG, or WebP formats for single-image exports. The integration of **jsPDF** supports bundling one or more images into a single PDF, complete with auto-generated filenames and white-background padding for transparency. Adjustable quality sliders let users optimize file size for email, web publishing, or device storage, all without leaving the browser.
 
-### 2. Advanced Filters & Tools (OpenCV.js)
-- **Resize & Crop**  
-  - Custom dimensions or percentage scaling  
-  - Aspect-ratio lock and common presets (720p, 1080p, square)  
-- **Artistic Effects**  
-  - Sketch, Sepia, Vignette, Grayscale, Invert, Pixelate, Oil Painting, Vintage  
-- **Edge Detection & Threshold**  
-  - Blur filters: Mean, Gaussian, Median  
-  - Edge detectors: Laplacian, Sobel, Canny  
-  - Binarisation: Simple threshold and Otsu’s method  
-- **Compression & Export**  
-  - JPEG/WebP quality slider (1–100)  
-  - Lossless PNG output  
-  - Pre-resize optimization for smaller files  
-  - Live file-size preview before download  
+#### Project Architecture
 
-### 3. Download & Export Options
-- Export processed images as PNG, JPG, WebP  
-- Bundle images into a single PDF (via jsPDF)  
-- Auto-generated filenames, white-background padding for transparency  
+- **app.py**  
+  - Flask application entry point  
+  - Defines routes for `/`, `/adjustments`, `/advanced`, and `/download`  
+  - Handles file uploads, invokes OpenCV-Python functions, and streams results via `io.BytesIO` without disk writes  
+- **requirements.txt**  
+  - Lists dependencies: Flask, OpenCV-Python, NumPy, jsPDF  
+- **templates/**  
+  - Jinja2 templates (`index.html`, `adjustments.html`, `advanced.html`) rendering dynamic HTML and linking static assets  
+- **static/css/style.css**  
+  - Responsive layout (grid & flexbox), themed sliders, mobile-first media queries  
+- **static/js/script.js**  
+  - UI logic: tab switching, file-input handling, download triggers  
+- **static/js/adjustments.js**  
+  - Canvas setup, slider event handlers, pixel manipulation routines  
+- **static/js/advanced.js**  
+  - Loads OpenCV.js, defines each filter function, manages resize/crop, compression estimation  
 
----
+#### Development Process & Design Choices
 
-## 🛠️ Tech Stack
+I initially evaluated a fully server-side pipeline versus a fully client-side approach. A server-only design simplified JavaScript but increased server load and round-trip latency. A client-only approach risked browser performance issues on large images. I settled on a hybrid model: lightweight client-side edits for instantaneous feedback, OpenCV.js for browser-based advanced filters, and a minimal Flask backend for PDF exports and fallback processing.
 
-- **Frontend:**  
-  - HTML5, CSS3 (Flexbox & Grid)  
-  - Vanilla JavaScript & OpenCV.js  
-  - jsPDF for PDF generation  
-- **Backend:**  
-  - Python 3 & Flask  
-  - OpenCV-Python & NumPy  
-  - In-memory file handling with `io.BytesIO`  
-- **Templating & Assets:**  
-  - Jinja2 for dynamic HTML rendering  
-  - Organized static files (`static/css`, `static/js`, `static/img`)  
+Choosing **HTML5 Canvas** allowed fine-grained control over pixel data without external libraries. **OpenCV.js** brought battle-tested computer-vision algorithms to the front end, avoiding the need to rewrite complex filters in JavaScript. **Flask** was selected for its simplicity and robust routing, while `io.BytesIO` streams keep image data in memory, improving performance and eliminating filesystem dependencies.
 
----
+#### Testing & Optimization
 
-## 🚀 Getting Started
+- **Unit Tests:** Python tests for backend filter functions and file streaming, using `pytest`.  
+- **Cross-Browser QA:** Manual testing on Chrome, Firefox, Safari, and mobile browsers to ensure Canvas performance and WebAssembly stability.  
+- **Performance Profiling:** Chrome DevTools Performance tab used to verify slider interactions remain above 60 fps, and memory usage stays within safe limits when chaining filters.
 
-### Prerequisites
+#### Future Roadmap
 
-- Python 3.8 or higher  
-- `pip` package manager  
-- Git (for cloning the repository)
+- **User Accounts & Cloud Storage:** Save editing states and enable project retrieval across devices.  
+- **Layer & History Support:** Add non-destructive layers, undo/redo functionality, and a visual history panel.  
+- **AI-Driven Filters:** Integrate TensorFlow.js for super-resolution, background removal, and style transfer.  
+- **Plugin System:** Expose a JavaScript API for third-party filter and export plugin development.
 
-### Installation & Launch
+#### Contributing & Community
 
-```bash
-# Clone the repository
-git clone https://github.com/yourusername/morphix.git
-cd morphix
-
-# Install Python dependencies
-pip install -r requirements.txt
-
-# Start the Flask server
-python app.py
-
-# Open your browser at:
-# http://localhost:5000
-````
-
----
-
-## 🖥️ Usage
-
-1. **Basic Adjustments**
-
-   * Navigate to the “Adjustments” tab
-   * Upload or drag-drop an image
-   * Slide controls for brightness, contrast, saturation, hue, temperature, sharpness
-2. **Advanced Tools**
-
-   * Switch to the “Advanced” tab
-   * Choose resize/crop presets or input custom values
-   * Apply artistic filters, edge detection, thresholding
-   * Adjust compression quality and view real-time file size
-3. **Download**
-
-   * Select output format (PNG, JPG, WebP, PDF)
-   * Click “Download” to save your edited image(s)
-
----
-
-## 📂 Project Structure
-
-```text
-morphix/
-├── app.py                 # Flask application entrypoint
-├── requirements.txt       # Python dependencies
-├── templates/             # Jinja2 HTML templates
-│   ├── index.html
-│   ├── adjustments.html
-│   └── advanced.html
-└── static/                # Static assets
-    ├── css/
-    │   └── style.css
-    └── js/
-        ├── script.js
-        ├── adjustments.js
-        └── advanced.js
-```
-
----
-
-## 🔧 Extending Morphix
-
-1. **Add New Filters**
-
-   * Frontend: add OpenCV.js routines in `static/js/advanced.js`
-   * Backend: implement corresponding Python/OpenCV functions in `app.py`
-2. **Customize Themes**
-
-   * Edit `static/css/style.css` or integrate a CSS framework (Bootstrap, Tailwind)
-3. **Support More Formats**
-
-   * Leverage Pillow or imageio to add TIFF, BMP, GIF exports
-
----
-
-## 🤝 Contributing
-
-1. Fork this repository
-2. Create a feature branch:
-
+Contributions are welcome! To contribute:  
+1. Fork the repo on GitHub.  
+2. Create a feature branch:  
    ```bash
    git checkout -b feature/YourFeature
-   ```
-3. Commit your changes:
-
-   ```bash
-   git commit -m "Add awesome feature"
-   ```
+3. Commit changes with clear messages.
 4. Push to your branch:
 
    ```bash
    git push origin feature/YourFeature
    ```
-5. Open a Pull Request and describe your updates.
+5. Open a Pull Request describing your enhancements.
 
-Please follow existing code style, include tests when applicable, and update this README for any new functionality.
+Please follow PEP 8 for Python code, maintain consistent JavaScript formatting, and update this README for any added features.
 
 ---
 
+Morphix demonstrates full-stack integration of modern web technologies—HTML5, CSS3, JavaScript, OpenCV.js, Flask, and OpenCV-Python—into a polished, extensible image editing tool. It balances performance and usability, offering a solid foundation for future enhancements.
