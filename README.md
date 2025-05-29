@@ -1,6 +1,4 @@
-
-# Morphix – Precision Image Transformation  
-#### Video Demo: https://youtu.be/your_video_url_here  
+# Morphix – Precision Image Transformation   
 #### Description:
 
 Morphix is a comprehensive, web-based image processing application designed to serve both casual users and professional workflows. It combines client-side editing for quick, real-time adjustments with server-side processing for advanced features, all wrapped in a clean, responsive interface. Users can perform basic edits—brightness, contrast, saturation, hue, temperature, sharpness—via intuitive sliders, and apply powerful OpenCV filters such as sketch, sepia, vignette, pixelate, oil painting, motion blur, Canny edge detection, Sobel, Laplacian, thresholding, and vintage effects. Final outputs may be downloaded in PNG, JPG, WebP formats or bundled into a multi-page PDF, with live file-size estimates and adjustable compression settings.
