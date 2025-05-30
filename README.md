@@ -8,9 +8,10 @@ The nav bar of home page will feature two other page: **Image Adjustments** and 
 
 #### Detailed Functionality
 
-**Image Adjustments Page**  Afters clicking on **Image Adjustments**, users upload an image via the file input control. The image is loaded onto an HTML5 Canvas, where six sliders—brightness, contrast, saturation, hue, temperature, and sharpness—become available. Each slider is linked to a JavaScript event listener that recalculates and redraws pixel data in under 50 ms, ensuring instant visual feedback without page reloads. This non-destructive, client-side approach saves bandwidth and delivers a smooth, desktop-like experience in any modern browser.
+**Image Adjustments Page**
+Afters clicking on **Image Adjustments**, users upload an image via the file input control. The image is loaded onto an HTML5 Canvas, where six sliders—brightness, contrast, saturation, hue, temperature, and sharpness—become available. Each slider is linked to a JavaScript event listener that recalculates and redraws pixel data in under 50 ms, ensuring instant visual feedback without page reloads. This non-destructive, client-side approach saves bandwidth and delivers a smooth, desktop-like experience in any modern browser.
 
-** Other tools Page**  
+**Other tools Page**
 The **Other Tools** tab brings in **OpenCV.js**, a WebAssembly port of the OpenCV library. Users upload an image and then choose from a suite of advanced filters executed entirely in the browser:  
 - **Artistic Effects**: Sketch, Oil Painting, Vignette, Vintage  
 - **Creative Distortions**: Motion Blur, Pixelate  
