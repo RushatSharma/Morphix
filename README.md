@@ -29,7 +29,7 @@ Once editing is complete, users choose from PNG, JPG, or WebP formats for single
 
 - **app.py**  
   - Flask application entry point  
-  - Defines routes for `/`, `/adjustments`, `/advanced`, and `/download`  
+  - Defines routes for `/`, `/adjustments` and `/advanced`.  
   - Handles file uploads, invokes OpenCV-Python functions, and streams results.  
 - **requirements.txt**  
   - Lists dependencies: Flask, OpenCV-Python, NumPy, jsPDF  
@@ -42,7 +42,7 @@ Once editing is complete, users choose from PNG, JPG, or WebP formats for single
 - **static/js/adjustments.js**  
   - Canvas setup, slider event handlers, pixel manipulation routines  
 - **static/js/advanced.js**  
-  - Loads OpenCV.js, defines each filter function, manages resize/crop, compression estimation  
+  - Loads OpenCV.js, defines each filter function, manages resize/crop, and compression estimation  
 
 #### Development Process & Design Choices
 
