@@ -57,4 +57,4 @@ def advanced():
 
 if __name__ == '__main__':
     os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
-    app.run(host="0.0.0.0", port=port, debug=True)
+    app.run(host="0.0.0.0", debug=True)
