@@ -48,7 +48,7 @@ def index():
 
 @app.route('/adjustments')
 def adjustments():
-    return render_template('adjustments.html')
+    return render_template('adjustments-new.html')
 
 @app.route('/advanced')
 def advanced():

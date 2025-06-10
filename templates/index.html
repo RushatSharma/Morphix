@@ -6,7 +6,7 @@
     <title>Morphix</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style-consolidated.css') }}">
 </head>
 <body>
     <nav>
@@ -21,6 +21,13 @@
                 <a href="{{ url_for('adjustments') }}">Image Adjustments</a>
                 <a href="{{ url_for('advanced') }}">Other Tools</a>
             </div>
+            <button class="hamburger-menu" aria-label="Open navigation menu" aria-expanded="false">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        <div class="mobile-nav" role="navigation">
+            <a href="{{ url_for('adjustments') }}">Image Adjustments</a>
+            <a href="{{ url_for('advanced') }}">Other Tools</a>
         </div>
     </nav>
 
@@ -189,5 +196,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script async src="https://docs.opencv.org/4.7.0/opencv.js" onload="onOpenCVReady()"></script>
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/mobile-nav.js') }}"></script>
 </body>
 </html>
