@@ -6,7 +6,7 @@
     <title>Morphix</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style-consolidated.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
     <nav>
@@ -50,37 +50,38 @@
             </div>
             <div class="filter-grid" id="filterGrid">
                 <div class="filter-card">
-                    <h3>Mean Blur</h3>
-                    <p>Applies uniform blur by averaging pixel values within a defined window size, creating smooth transitions while reducing noise and detail.</p>
-                </div>
-                <div class="filter-card">
-                    <h3>Gaussian Blur</h3>
-                    <p>Creates natural-looking blur using weighted averages with a Gaussian distribution, preserving edges better than standard mean blur.</p>
-                </div>
-                <div class="filter-card">
-                    <h3>Median Filter</h3>
-                    <p>Replaces each pixel with the median value of neighboring pixels, excellent for removing salt-and-pepper noise while preserving edges.</p>
-                </div>
-                <div class="filter-card">
-                    <h3>Laplacian Edge</h3>
-                    <p>Detects edges by calculating the second derivative, highlighting regions of rapid intensity change in all directions simultaneously.</p>
-                </div>
-                <div class="filter-card">
-                    <h3>Sobel Edge</h3>
-                    <p>Emphasizes edges using gradient measurements in horizontal and vertical directions, providing better noise suppression than simple derivatives.</p>
-                </div>
-                <div class="filter-card">
-                    <h3>Canny Edge</h3>
-                    <p>Multi-stage edge detection algorithm that reduces noise, finds intensity gradients, and applies hysteresis thresholding for optimal edge detection.</p>
-                </div>
-                <div class="filter-card">
-                    <h3>Binary Threshold</h3>
-                    <p>Converts grayscale images to black and white using a fixed threshold value, creating stark contrasts and simplified representations.</p>
-                </div>
-                <div class="filter-card">
-                    <h3>Otsu's Threshold</h3>
-                    <p>Automatically determines optimal threshold value by minimizing intra-class variance, ideal for bimodal images with distinct foreground and background.</p>
-                </div>
+    <h3 style="margin-bottom: 5px; margin-top: 0px;">Mean Blur</h3>
+    <p style="margin-bottom: px; margin-top: 0px;">Applies uniform blur by averaging pixel values within a defined window size, creating smooth transitions while reducing noise and detail.</p>
+</div>
+<div class="filter-card">
+    <h3 style="margin-bottom: 5px; margin-top: 0px;">Gaussian Blur</h3>
+    <p style="margin-bottom: px; margin-top: 0px;">Creates natural-looking blur using weighted averages with a Gaussian distribution, preserving edges better than standard mean blur.</p>
+</div>
+<div class="filter-card">
+    <h3 style="margin-bottom: 5px; margin-top: 0px;">Median Filter</h3>
+    <p style="margin-bottom: px; margin-top: 0px;">Replaces each pixel with the median value of neighboring pixels, excellent for removing salt-and-pepper noise while preserving edges.</p>
+</div>
+<div class="filter-card">
+    <h3 style="margin-bottom: 5px; margin-top: 0px;">Laplacian Edge</h3>
+    <p style="margin-bottom: px; margin-top: 0px;">Detects edges by calculating the second derivative, highlighting regions of rapid intensity change in all directions simultaneously.</p>
+</div>
+<div class="filter-card">
+    <h3 style="margin-bottom: 5px; margin-top: 0px;">Sobel Edge</h3>
+    <p style="margin-bottom: px; margin-top: 0px;">Emphasizes edges using gradient measurements in horizontal and vertical directions, providing better noise suppression than simple derivatives.</p>
+</div>
+<div class="filter-card">
+    <h3 style="margin-bottom: 5px; margin-top: 0px;">Canny Edge</h3>
+    <p style="margin-bottom: px; margin-top: 0px;">Multi-stage edge detection algorithm that reduces noise, finds intensity gradients, and applies hysteresis thresholding for optimal edge detection.</p>
+</div>
+<div class="filter-card">
+    <h3 style="margin-bottom: 5px; margin-top: 0px;">Binary Threshold</h3>
+    <p style="margin-bottom: px; margin-top: 0px;">Converts grayscale images to black and white using a fixed threshold value, creating stark contrasts and simplified representations.</p>
+</div>
+<div class="filter-card">
+    <h3 style="margin-bottom: 5px; margin-top: 0px;">Otsu's Threshold</h3>
+    <p style="margin-bottom: px; margin-top: 0px;">Automatically determines optimal threshold value by minimizing intra-class variance, ideal for bimodal images with distinct foreground and background.</p>
+</div>
+
             </div>
         </div>
 
