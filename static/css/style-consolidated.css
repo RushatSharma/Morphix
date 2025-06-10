@@ -16,6 +16,7 @@ body {
     color: var(--dark-chocolate);
     font-family: 'Inter', sans-serif;
     line-height: 1.8;
+    margin-bottom: 0px;
 }
 
 h1, h2, h3, h4, nav a {
@@ -76,7 +77,7 @@ nav .container {
 
 .hero {
     text-align: center;
-    padding: 5rem 0 3rem;
+    padding: 1rem 0 1rem;
     background-color: rgba(255, 255, 255, 0.85);
     border-bottom: 1px solid rgba(193, 18, 31, 0.2);
 }
@@ -104,7 +105,7 @@ h1.main-heading {
 .filter-grid-container {
     position: relative;
     overflow: hidden;
-    margin: 3rem 0;
+    margin: 1rem 0;
     width: 100%;
      /* Add padding for the navigation buttons */
 }
@@ -113,13 +114,12 @@ h1.main-heading {
     display: flex;
     transition: transform 0.5s ease;
     gap: 1rem; /* Use gap for consistent spacing */
-
     width: 100%;
 }
 
 .filter-card {
     background: white;
-    padding: 1rem;
+    padding: 15px;
     border-radius: 8px;
     box-shadow: 0 3px 15px var(--soft-shadow);
     transition: transform 0.3s ease;
@@ -128,9 +128,11 @@ h1.main-heading {
     flex: 0 0 calc(24% - 1.5rem);
     box-sizing: border-box;
     margin: 0 0.75rem;
-    height: 300px; /* Ensure consistent height */
+    height: 250px; /* Ensure consistent height */
     display: flex;
     flex-direction: column;
+    margin-bottom: 0px;
+
 }
 
 .filter-card:hover {
@@ -147,6 +149,7 @@ h1.main-heading {
     display: flex;
     justify-content: space-between;
     margin-bottom: 1rem;
+    height: 50px;
 }
 
 .grid-nav-btn {
