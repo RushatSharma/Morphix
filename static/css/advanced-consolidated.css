@@ -444,3 +444,168 @@
            grid-template-columns: 1fr; /* Single column on very small screens */
        }
    }
+
+/* Dark Mode Overrides for advanced-consolidated.css */
+body.dark-mode .tools-section {
+    background: transparent; /* Allow main body gradient */
+}
+
+body.dark-mode .tools-container {
+    background: var(--dm-section-bg);
+    box-shadow: var(--dm-strong-shadow); /* Slightly stronger shadow for main container */
+    border: 1px solid var(--dm-border-color);
+}
+
+body.dark-mode .tools-container h2 {
+    color: var(--dm-text-headings);
+}
+
+body.dark-mode .tool-tab {
+    background: var(--dm-card-bg);
+    color: var(--dm-text-primary);
+    border: 1px solid var(--dm-border-color);
+}
+body.dark-mode .tool-tab:hover {
+    background: var(--dm-section-bg); /* Slightly different hover */
+    border-color: var(--dm-accent-primary);
+}
+body.dark-mode .tool-tab.active {
+    background: var(--dm-accent-primary);
+    color: var(--dm-button-text-color);
+    border-color: var(--dm-accent-primary);
+}
+
+body.dark-mode .file-input-section label {
+    /* background: var(--burgundy) is inherited */
+    color: var(--dm-button-text-color);
+}
+body.dark-mode .file-input-section label:hover {
+    background: var(--dm-accent-secondary);
+}
+body.dark-mode #fileName {
+    color: var(--dm-text-primary);
+}
+
+body.dark-mode .preview-area,
+body.dark-mode .resize-options,
+body.dark-mode .filter-options,
+body.dark-mode .text-options,
+body.dark-mode .compress-options {
+    background: var(--dm-card-bg);
+    box-shadow: var(--dm-soft-shadow);
+    border: 1px solid var(--dm-border-color);
+}
+
+body.dark-mode .resize-options h3,
+body.dark-mode .filter-options h3, /* Assuming h3 in other option panels */
+body.dark-mode .text-options h3,
+body.dark-mode .compress-options h3 {
+    color: var(--dm-text-headings);
+}
+
+body.dark-mode .option-group > label,
+body.dark-mode .input-group label,
+body.dark-mode .checkbox-label { /* checkbox-label text color */
+    color: var(--dm-text-primary);
+}
+
+body.dark-mode input[type="number"],
+body.dark-mode input[type="text"],
+body.dark-mode select {
+    background-color: var(--dm-section-bg);
+    color: var(--dm-text-primary);
+    border-color: var(--dm-border-color);
+}
+body.dark-mode input[type="number"]:focus,
+body.dark-mode input[type="text"]:focus,
+body.dark-mode select:focus {
+    border-color: var(--dm-accent-primary);
+    box-shadow: 0 0 0 2px var(--dm-accent-primary);
+}
+
+
+body.dark-mode input[type="range"] {
+    background: rgba(255, 255, 255, 0.1); /* Lighter track */
+}
+/* Range thumb uses var(--burgundy) - already handled by variable override */
+
+body.dark-mode .preset-button {
+    background: var(--dm-section-bg);
+    color: var(--dm-text-primary);
+    border: 1px solid var(--dm-border-color);
+}
+body.dark-mode .preset-button:hover {
+    background: var(--dm-card-bg); /* Slightly lighter on hover */
+    border-color: var(--dm-accent-primary);
+}
+
+body.dark-mode .process-button {
+    /* background: var(--burgundy) is inherited */
+    color: var(--dm-button-text-color);
+}
+body.dark-mode .process-button:hover {
+    background: var(--dm-accent-secondary);
+}
+
+body.dark-mode .dimension-info {
+    color: var(--dm-text-primary);
+}
+
+body.dark-mode .filter-option {
+    background: var(--dm-section-bg);
+    border-color: var(--dm-border-color);
+    box-shadow: var(--dm-soft-shadow);
+}
+body.dark-mode .filter-option:hover {
+    background: var(--dm-card-bg);
+    border-color: var(--dm-accent-primary);
+}
+body.dark-mode .filter-option.selected {
+    border-color: var(--dm-accent-primary);
+    background: var(--dm-card-bg); /* Ensure selected is distinct */
+    box-shadow: 0 0 0 3px var(--dm-accent-primary);
+}
+body.dark-mode .filter-preview i {
+    color: var(--dm-accent-primary); /* Was --burgundy */
+}
+body.dark-mode .filter-preview span {
+    color: var(--dm-text-primary); /* Was --dark-chocolate */
+}
+
+body.dark-mode .option-tabs .option-tab { /* These are like .tool-tab */
+    background: var(--dm-card-bg);
+    color: var(--dm-text-primary);
+    border: 1px solid var(--dm-border-color);
+}
+body.dark-mode .option-tabs .option-tab:hover {
+    background: var(--dm-section-bg);
+    border-color: var(--dm-accent-primary);
+}
+body.dark-mode .option-tabs .option-tab.active {
+    background: var(--dm-accent-primary);
+    color: var(--dm-button-text-color);
+    border-color: var(--dm-accent-primary);
+}
+
+body.dark-mode .compression-info {
+    background: var(--dm-section-bg);
+    color: var(--dm-text-primary);
+    border: 1px solid var(--dm-border-color);
+}
+body.dark-mode .info-item {
+    /* Text color will be inherited */
+}
+
+body.dark-mode .download-button { /* Already styled like .process-button */
+    /* background: var(--burgundy) is inherited */
+    color: var(--dm-button-text-color);
+}
+body.dark-mode .download-button:hover {
+    background: var(--dm-accent-secondary);
+}
+
+/* Placeholder text in preview areas if any */
+body.dark-mode .preview-area .placeholder-text {
+    color: var(--dm-text-primary);
+    opacity: 0.7;
+}

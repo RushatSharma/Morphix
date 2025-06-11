@@ -206,3 +206,61 @@
         grid-template-columns: 1fr;
     }
 }
+
+/* Dark Mode Overrides for adjustments.css */
+body.dark-mode .adjustments-section {
+    background: transparent; /* Allow main body gradient to show */
+}
+
+body.dark-mode .preview-wrapper,
+body.dark-mode .controls-wrapper,
+body.dark-mode .download-wrapper {
+    background: var(--dm-card-bg);
+    box-shadow: var(--dm-soft-shadow);
+    border: 1px solid var(--dm-border-color); /* Add subtle border for cards in dark mode */
+}
+
+body.dark-mode .adjustment-control input[type="range"] {
+    background: rgba(255, 255, 255, 0.1); /* Lighter track for range */
+}
+/* Note: ::-webkit-slider-thumb and ::-moz-range-thumb already use var(--burgundy) which is overridden */
+
+body.dark-mode .reset-button {
+    /* background: var(--burgundy) is inherited and correctly overridden */
+    color: var(--dm-button-text-color); /* Ensure text color contrasts with new button bg */
+}
+body.dark-mode .reset-button:hover {
+    background: var(--dm-accent-secondary);
+}
+
+
+body.dark-mode .file-input label {
+    /* background: var(--burgundy) is inherited */
+    color: var(--dm-button-text-color);
+}
+body.dark-mode .file-input label:hover {
+    background: var(--dm-accent-secondary); /* Use the secondary accent for hover */
+}
+
+body.dark-mode .format-select {
+    border-color: var(--dm-border-color);
+    background: var(--dm-section-bg); /* Slightly different from card-bg for differentiation */
+    color: var(--dm-text-primary);
+}
+
+/* quality-control's label uses --dark-chocolate (handled) */
+/* quality-control's range input and thumb use same classes as adjustment-control (handled) */
+
+body.dark-mode .download-button {
+    /* background: var(--burgundy) is inherited */
+    color: var(--dm-button-text-color);
+}
+body.dark-mode .download-button:hover {
+    background: var(--dm-accent-secondary);
+}
+
+/* Ensure specific text elements not covered by global color changes are updated */
+body.dark-mode .adjustment-control label,
+body.dark-mode .quality-control label {
+    color: var(--dm-text-primary); /* Explicitly set if not inheriting correctly */
+}

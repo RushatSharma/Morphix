@@ -16,7 +16,6 @@ body {
     color: var(--dark-chocolate);
     font-family: 'Inter', sans-serif;
     line-height: 1.8;
-    margin-bottom: 0px;
 }
 
 h1, h2, h3, h4, nav a {
@@ -77,7 +76,7 @@ nav .container {
 
 .hero {
     text-align: center;
-    padding: 1rem 0 1rem;
+    padding: 5rem 0 3rem;
     background-color: rgba(255, 255, 255, 0.85);
     border-bottom: 1px solid rgba(193, 18, 31, 0.2);
 }
@@ -105,7 +104,7 @@ h1.main-heading {
 .filter-grid-container {
     position: relative;
     overflow: hidden;
-    margin: 1rem 0;
+    margin: 3rem 0;
     width: 100%;
      /* Add padding for the navigation buttons */
 }
@@ -114,12 +113,13 @@ h1.main-heading {
     display: flex;
     transition: transform 0.5s ease;
     gap: 1rem; /* Use gap for consistent spacing */
+
     width: 100%;
 }
 
 .filter-card {
     background: white;
-    padding: 15px;
+    padding: 1rem;
     border-radius: 8px;
     box-shadow: 0 3px 15px var(--soft-shadow);
     transition: transform 0.3s ease;
@@ -128,11 +128,9 @@ h1.main-heading {
     flex: 0 0 calc(24% - 1.5rem);
     box-sizing: border-box;
     margin: 0 0.75rem;
-    height: 250px; /* Ensure consistent height */
+    height: 300px; /* Ensure consistent height */
     display: flex;
     flex-direction: column;
-    margin-bottom: 0px;
-
 }
 
 .filter-card:hover {
@@ -149,7 +147,6 @@ h1.main-heading {
     display: flex;
     justify-content: space-between;
     margin-bottom: 1rem;
-    height: 50px;
 }
 
 .grid-nav-btn {
@@ -836,4 +833,242 @@ footer a:hover {
     .mobile-nav-active .hamburger-menu i::before {
         content: "\f00d"; /* Font Awesome times icon */
     }
+}
+
+/* Dark Mode Variables */
+body.dark-mode {
+    --dm-page-bg: linear-gradient(135deg, #10101A, #0A0A10);
+    --dm-text-primary: #EAEAEA;
+    --dm-text-headings: #00CFE8; /* Neon Cyan/Blue */
+    --dm-accent-primary: #00CFE8; /* Neon Cyan/Blue for buttons, links etc. */
+    --dm-accent-secondary: #7F00FF; /* Electric Violet for other highlights */
+
+    --dm-card-bg: rgba(40, 40, 50, 0.8);
+    --dm-section-bg: rgba(30, 30, 40, 0.7); /* For hero, upload-section etc. */
+
+    --dm-border-color: rgba(100, 100, 120, 0.3);
+    --dm-soft-shadow: 0 4px 15px rgba(0, 207, 232, 0.1); /* Neon Cyan glow */
+    --dm-strong-shadow: 0 6px 20px rgba(0, 207, 232, 0.15);
+
+    /* Overriding existing theme variables for dark mode */
+    --parchment: transparent; /* Base page bg will be gradient */
+    --burgundy: var(--dm-accent-primary);
+    --dark-chocolate: var(--dm-text-primary);
+    --soft-shadow: var(--dm-soft-shadow);
+    --orange-red: var(--dm-accent-secondary); /* e.g. for footer bg */
+
+    /* Specific component overrides if needed */
+    --dm-nav-bg: rgba(20, 20, 30, 0.85); /* Slightly different from cards, with backdrop blur if possible */
+    --dm-nav-border: rgba(100, 100, 120, 0.2);
+    --dm-footer-bg: #0A0A10; /* Solid very dark for footer base */
+    --dm-logo-color: var(--dm-accent-primary);
+    --dm-button-text-color: #0A0A10; /* Dark text on bright buttons */
+}
+
+/* Dark Mode Style Overrides */
+
+/* General Body and Text */
+body.dark-mode {
+    background: var(--dm-page-bg); /* Gradient background */
+    color: var(--dm-text-primary);
+}
+
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode h4,
+body.dark-mode nav a { /* Assuming nav a should also use heading color in dark mode */
+    color: var(--dm-text-headings);
+}
+body.dark-mode .logo {
+    color: var(--dm-logo-color);
+}
+body.dark-mode .logo svg {
+    stroke: var(--dm-logo-color); /* If SVG uses stroke */
+}
+
+/* Navigation */
+body.dark-mode nav {
+    background-color: var(--dm-nav-bg);
+    box-shadow: 0 1px 3px var(--dm-soft-shadow); /* Use dark mode shadow */
+    border-bottom-color: var(--dm-nav-border);
+}
+body.dark-mode nav .container .nav-links a {
+    color: var(--dm-text-primary); /* Standard text for links */
+}
+body.dark-mode nav .container .nav-links a:hover {
+    color: var(--dm-accent-primary); /* Accent on hover */
+}
+
+/* Hero Section */
+body.dark-mode .hero {
+    background-color: var(--dm-section-bg);
+    border-bottom-color: var(--dm-border-color);
+}
+body.dark-mode h1.main-heading {
+    color: var(--dm-text-headings); /* Already covered by general h1, but can be specific */
+}
+body.dark-mode .tagline {
+    color: var(--dm-text-primary);
+}
+
+/* Cards & Grids */
+body.dark-mode .filter-card {
+    background: var(--dm-card-bg);
+    box-shadow: 0 3px 15px var(--dm-soft-shadow);
+    border-left-color: transparent; /* Or a subtle accent on hover */
+}
+body.dark-mode .filter-card:hover {
+    border-left-color: var(--dm-accent-primary);
+}
+body.dark-mode .filter-card h3 {
+    color: var(--dm-text-headings);
+}
+body.dark-mode .grid-nav-btn {
+    background-color: var(--dm-accent-primary);
+    color: var(--dm-button-text-color); /* Dark text on bright button */
+    box-shadow: 0 2px 5px var(--dm-strong-shadow);
+}
+body.dark-mode .grid-nav-btn:hover {
+    background-color: var(--dm-accent-secondary); /* Different accent on hover */
+}
+body.dark-mode .grid-nav-btn:disabled {
+    background-color: rgba(100, 100, 120, 0.5); /* Muted disabled state */
+    color: rgba(200, 200, 200, 0.7);
+}
+
+/* Preview and Upload Sections */
+body.dark-mode .preview-panel {
+    background: var(--dm-card-bg); /* Consistent with cards */
+    box-shadow: 0 3px 15px var(--dm-soft-shadow);
+}
+body.dark-mode .preview-panel img { /* If images have a light bg that looks odd */
+    background: rgba(255,255,255,0.05); /* Very subtle bg for images if needed */
+}
+body.dark-mode .upload-section {
+    background: var(--dm-section-bg);
+    box-shadow: 0 3px 15px var(--dm-soft-shadow);
+}
+body.dark-mode .upload-instructions {
+    color: var(--dm-text-primary);
+}
+body.dark-mode .step-number {
+    background-color: var(--dm-accent-primary);
+    color: var(--dm-button-text-color);
+}
+
+/* Form Elements & Buttons */
+body.dark-mode .file-input label {
+    background: var(--dm-accent-primary);
+    color: var(--dm-button-text-color);
+}
+body.dark-mode .file-input label:hover {
+    background: var(--dm-accent-secondary);
+}
+body.dark-mode .filter-select select {
+    border-color: var(--dm-accent-primary);
+    background-color: var(--dm-card-bg); /* Darker select background */
+    color: var(--dm-text-primary);
+    /* May need to update background-image for dropdown arrow if it's SVG and color-specific */
+}
+body.dark-mode .filter-select select:focus {
+    border-color: var(--dm-accent-secondary);
+    box-shadow: 0 0 0 3px var(--dm-accent-secondary); /* Use accent for focus */
+}
+body.dark-mode .process-button { /* Also .download-button if it shares styles */
+    background: var(--dm-accent-primary);
+    color: var(--dm-button-text-color);
+}
+body.dark-mode .process-button:hover {
+    background: var(--dm-accent-secondary);
+}
+body.dark-mode .download-button { /* Specific if different */
+    background-color: var(--dm-accent-primary);
+    color: var(--dm-button-text-color);
+}
+body.dark-mode .download-button:hover {
+    background-color: var(--dm-accent-secondary);
+}
+
+/* Image Placeholder & Borders */
+body.dark-mode .image-container {
+    border-color: var(--dm-border-color);
+}
+body.dark-mode .image-container::before { /* Empty state message */
+    color: var(--dm-text-primary);
+    opacity: 0.7;
+}
+
+/* Pagination */
+body.dark-mode .pagination a {
+    color: var(--dm-accent-primary);
+    background-color: transparent; /* Ensure no light bg */
+}
+body.dark-mode .pagination a.active {
+    background-color: var(--dm-accent-primary);
+    color: var(--dm-button-text-color);
+}
+body.dark-mode .pagination a:hover:not(.active) {
+    background-color: var(--dm-section-bg); /* Use section bg for hover */
+    color: var(--dm-accent-secondary);
+}
+
+/* Footer */
+body.dark-mode footer {
+    background-color: var(--dm-footer-bg); /* Solid dark for footer */
+    color: var(--dm-text-primary);
+}
+body.dark-mode footer h4 {
+    color: var(--dm-text-headings);
+}
+body.dark-mode footer a {
+    color: var(--dm-text-primary);
+    opacity: 0.8;
+}
+body.dark-mode footer a:hover {
+    color: var(--dm-accent-primary);
+    opacity: 1;
+}
+body.dark-mode .copyright {
+    border-top-color: var(--dm-border-color);
+}
+body.dark-mode .social-icons a {
+    color: var(--dm-text-primary);
+}
+body.dark-mode .social-icons a:hover {
+    color: var(--dm-accent-primary);
+}
+
+/* Format Controls (index.html) */
+body.dark-mode .format-select { /* This is for the select in download-container */
+    border-color: var(--dm-accent-primary);
+    background-color: var(--dm-card-bg);
+    color: var(--dm-text-primary);
+}
+body.dark-mode .quality-control label {
+    color: var(--dm-text-primary);
+}
+/* Range input styling for dark mode might be needed if default is not good */
+body.dark-mode input[type="range"]::-webkit-slider-thumb {
+    background: var(--dm-accent-primary);
+}
+body.dark-mode input[type="range"]::-moz-range-thumb { /* Firefox */
+    background: var(--dm-accent-primary);
+}
+
+/* Hamburger Menu */
+body.dark-mode .hamburger-menu {
+    color: var(--dm-text-headings);
+}
+body.dark-mode .mobile-nav {
+    background-color: var(--dm-nav-bg); /* Consistent with nav */
+    box-shadow: 0 2px 5px var(--dm-soft-shadow);
+}
+body.dark-mode .mobile-nav a {
+    color: var(--dm-text-primary);
+    border-bottom-color: var(--dm-border-color);
+}
+body.dark-mode .mobile-nav a:hover {
+    background-color: var(--dm-section-bg);
+    color: var(--dm-accent-primary);
 }

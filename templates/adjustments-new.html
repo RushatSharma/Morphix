@@ -22,6 +22,7 @@
             <div class="nav-links">
                 <a href="{{ url_for('index') }}">Home</a>
                 <a href="{{ url_for('advanced') }}">Other Tools</a>
+                <button id="themeToggleButton" class="theme-toggle-button">Dark Mode</button>
             </div>
             <button class="hamburger-menu" aria-label="Open navigation menu" aria-expanded="false">
                 <i class="fas fa-bars"></i>
@@ -152,5 +153,6 @@
 
     <script src="{{ url_for('static', filename='js/adjustments.js') }}"></script>
     <script src="{{ url_for('static', filename='js/mobile-nav.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/theme-toggle.js') }}"></script>
 </body>
 </html>
