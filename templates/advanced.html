@@ -23,6 +23,13 @@
                 <a href="{{ url_for('index') }}">Home</a>
                 <a href="{{ url_for('adjustments') }}">Image Adjustments</a>
             </div>
+            <button class="hamburger-menu" aria-label="Open navigation menu" aria-expanded="false">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        <div class="mobile-nav" role="navigation">
+            <a href="{{ url_for('index') }}">Home</a>
+            <a href="{{ url_for('adjustments') }}">Image Adjustments</a>
         </div>
     </nav>
 
@@ -307,5 +314,6 @@
 
     <script async src="https://docs.opencv.org/4.7.0/opencv.js" onload="onOpenCVReady()"></script>
     <script src="{{ url_for('static', filename='js/advanced.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/mobile-nav.js') }}"></script>
 </body>
 </html>
