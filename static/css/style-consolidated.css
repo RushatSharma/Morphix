@@ -683,6 +683,57 @@ footer a:hover {
         margin-bottom: 5px;
     }
     /* End Pagination adjustments for 768px */
+
+    /* --- Theme Toggle Mobile Visibility Fix --- */
+
+    /* Ensure nav container children can be ordered */
+    /* nav .container is already display:flex and align-items:center */
+
+    /* Override display:none for .nav-links to make its child button potentially visible */
+    nav .container .nav-links {
+        display: flex !important; /* Force display, override other mobile rule for .nav-links */
+        align-items: center;
+        margin-top: 0; /* Reset any top margin specific to mobile .nav-links */
+        margin-left: 0; /* Reset margin if it was for desktop list */
+        order: 3; /* Place it after logo and hamburger */
+        padding-left: 0.5rem; /* Space from hamburger */
+    }
+
+    /* Hide the actual navigation links within .nav-links on mobile */
+    nav .container .nav-links a {
+        display: none;
+    }
+
+    /* Style the theme toggle button itself (which is inside .nav-links) */
+    nav .container .nav-links .theme-toggle-button {
+        display: inline-block; /* Make it visible */
+        padding: 0.4rem 0.6rem;
+        font-size: 0.8rem;
+        background-color: var(--dm-section-bg); /* Use a theme-aware variable */
+        border: 1px solid var(--dm-border-color); /* Use a theme-aware variable */
+        color: var(--dark-chocolate); /* This will be themed by body.dark-mode's --dark-chocolate override */
+        border-radius: 4px;
+        cursor: pointer;
+        /* margin-left is handled by .nav-links padding-left */
+    }
+
+    /* Dark mode specific style for the button text/border if needed */
+    body.dark-mode nav .container .nav-links .theme-toggle-button {
+        background-color: var(--dm-section-bg); /* Ensure it uses DM var */
+        border-color: var(--dm-border-color); /* Ensure it uses DM var */
+        color: var(--dm-text-primary); /* Ensure it uses DM var */
+    }
+
+    /* Ensure hamburger is ordered correctly */
+    nav .container .hamburger-menu {
+        order: 2;
+    }
+
+    /* Ensure logo is ordered correctly */
+    nav .container .logo {
+        order: 1;
+    }
+    /* --- End Theme Toggle Mobile Visibility Fix --- */
 }
 
 @media (max-width: 576px) {
@@ -837,32 +888,33 @@ footer a:hover {
 
 /* Dark Mode Variables */
 body.dark-mode {
-    --dm-page-bg: linear-gradient(135deg, #10101A, #0A0A10);
-    --dm-text-primary: #EAEAEA;
-    --dm-text-headings: #00CFE8; /* Neon Cyan/Blue */
-    --dm-accent-primary: #00CFE8; /* Neon Cyan/Blue for buttons, links etc. */
-    --dm-accent-secondary: #7F00FF; /* Electric Violet for other highlights */
+    --dm-page-bg: linear-gradient(135deg, #3B1F3A, #2A1B1F); /* Deep Plum to Dark Desaturated Red/Brown */
+    --dm-text-primary: #E0E0E0; /* Light Gray */
+    --dm-text-headings: #FFFFFF; /* White */
+    --dm-accent-primary: #EB5A3C; /* User-defined Orange-Red */
+    /* Define a secondary accent if needed, e.g., a lighter/darker shade of primary or a complementary color */
+    --dm-accent-secondary: #FFAD85; /* Lighter shade of EB5A3C for hover states, if needed */
 
-    --dm-card-bg: rgba(40, 40, 50, 0.8);
-    --dm-section-bg: rgba(30, 30, 40, 0.7); /* For hero, upload-section etc. */
+    --dm-card-bg: #2C2528; /* Dark, warm, slightly desaturated purple/brown */
+    --dm-section-bg: #2C2528; /* Same as card for now */
 
-    --dm-border-color: rgba(100, 100, 120, 0.3);
-    --dm-soft-shadow: 0 4px 15px rgba(0, 207, 232, 0.1); /* Neon Cyan glow */
-    --dm-strong-shadow: 0 6px 20px rgba(0, 207, 232, 0.15);
+    --dm-border-color: rgba(235, 90, 60, 0.25); /* Subtle, from primary accent */
+    --dm-soft-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Very subtle dark shadow */
+    --dm-strong-shadow: 0 6px 20px rgba(0, 0, 0, 0.25); /* Slightly stronger dark shadow */
 
     /* Overriding existing theme variables for dark mode */
-    --parchment: transparent; /* Base page bg will be gradient */
-    --burgundy: var(--dm-accent-primary);
-    --dark-chocolate: var(--dm-text-primary);
+    --parchment: transparent; /* Page background will be the gradient */
+    --burgundy: var(--dm-accent-primary); /* Main interactive color */
+    --dark-chocolate: var(--dm-text-primary); /* Main text color */
     --soft-shadow: var(--dm-soft-shadow);
-    --orange-red: var(--dm-accent-secondary); /* e.g. for footer bg */
+    --orange-red: var(--dm-accent-primary); /* Ensure this also maps to the new primary accent */
 
-    /* Specific component overrides if needed */
-    --dm-nav-bg: rgba(20, 20, 30, 0.85); /* Slightly different from cards, with backdrop blur if possible */
-    --dm-nav-border: rgba(100, 100, 120, 0.2);
-    --dm-footer-bg: #0A0A10; /* Solid very dark for footer base */
+    /* Specific component base colors for dark mode */
+    --dm-nav-bg: rgba(30, 25, 28, 0.85); /* Dark, warm, semi-transparent for nav */
+    --dm-nav-border: rgba(235, 90, 60, 0.2);
+    --dm-footer-bg: #1F1518; /* Very dark, solid, from the darker end of the gradient idea */
     --dm-logo-color: var(--dm-accent-primary);
-    --dm-button-text-color: #0A0A10; /* Dark text on bright buttons */
+    --dm-button-text-color: #FFFFFF; /* White text on primary accent buttons */
 }
 
 /* Dark Mode Style Overrides */
